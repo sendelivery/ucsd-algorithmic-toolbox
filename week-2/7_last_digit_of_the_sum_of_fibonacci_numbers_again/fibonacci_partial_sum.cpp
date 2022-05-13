@@ -8,7 +8,6 @@ long long fibonacci_sum_fast(long long n) {
     else if (n == 1)
         return 1;
 
-    n = n % 60;
     if (n == 0) 
         return 0;
 
@@ -46,7 +45,11 @@ long long get_fibonacci_partial_sum_naive(long long from, long long to) {
 }
 
 long long get_fibonacci_partial_sum_fast(long long from, long long to) {
-    return abs(fibonacci_sum_fast(from - 1) - fibonacci_sum_fast(to)) % 10;
+    from = from % 60;
+    to = from + (to-from) % 60;
+
+    long long res = fibonacci_sum_fast(to) - fibonacci_sum_fast(from - 1);
+    return res % 10;
 }
 
 int main() {
